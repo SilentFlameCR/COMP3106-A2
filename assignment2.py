@@ -1,7 +1,12 @@
-# Implementation: read CSV [class,length,weight,speed], learn Gaussian params per class
-# and priors from the dataset, then classify a new snake via Naïve Bayes with
-# independent Gaussian likelihoods.
-# returns (most_likely_class, [P(anaconda), P(cobra), P(python)]) for a given [L, W, S].
+# COMP 3106 Fall 2025 Assignment 2
+# Carleton University
+# Student Implementation
+
+# Group 133
+# Abaan Norman (101305538), Emily Amos (101311817), Rahul Rodrigues (101145082)
+
+# Implementation: read CSV [class,length,weight,speed], learn Gaussian params per class and priors from the dataset, then classify a new snake via Naïve Bayes 
+# with independent Gaussian likelihoods. returns (most_likely_class, [P(anaconda), P(cobra), P(python)]) for a given [L, W, S].
 
 from math import log, sqrt, pi, exp
 import csv
@@ -11,7 +16,7 @@ def mean(values):
 
 def std(values, mu):
     # population std (ddof = 1)
-    # using epsilon floor to avoid zero variance issues
+    # use epsilon floor to avoid zero variance issues
     n = len(values)
     if not values:
         return 1.0
@@ -23,13 +28,11 @@ def log_gaussian_pdf(x, mu, sigma):
     return -0.5 * log(2.0 * pi) - log(sigma) - 0.5 * ((x - mu) / sigma) ** 2
 
 def parse_csv(dataset_filepath, classes=None):
-    """
-    Reads CSV with rows: label,length,weight,speed
-    Returns:
-      per_class object with key snake type and inside length, weight and speed
-        formatted like: {class: {"length": [...], "weight": [...], "speed": [...]}}
-      total_count: int
-    """
+    # Reads CSV with these rows: label,length,weight,speed
+    # Returns:
+    #   - per_class object with key snake type and inside length, weight and speed
+    #       - formatted like: {class: {"length": [...], "weight": [...], "speed": [...]}}
+    #   - total_count: int
     if classes is None:
         classes = ["anaconda", "cobra", "python"]
 
