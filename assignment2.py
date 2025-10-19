@@ -68,9 +68,6 @@ def naive_bayes_classifier(dataset_filepath, snake_measurements):
     ORDER = ["anaconda", "cobra", "python"]
 
     per_class, total_count = parse_csv(dataset_filepath, classes=ORDER)
-    # print(per_class)
-    # print('-------')
-    # print(total_count)
     if total_count == 0:
         raise ValueError("Dataset appears is empty.")
 
@@ -125,9 +122,5 @@ def naive_bayes_classifier(dataset_filepath, snake_measurements):
 
     most_idx = max(range(len(ORDER)), key=lambda i: class_probabilities[i])
     most_likely_class = ORDER[most_idx]
-
-    # print(f"The class probabilities are: {class_probabilities} and the most likely class is {most_likely_class}")
     
     return most_likely_class, class_probabilities
-
-# naive_bayes_classifier('./Examples/Example0/dataset.csv', [390, 28, 13])
